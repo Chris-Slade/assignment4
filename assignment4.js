@@ -14,6 +14,24 @@
 (function() {
   // Magic!
   console.log('Keepin\'n it clean with an external script!');
+  var httpRequest;
+
+  if (window.XMLHttpRequest) {
+      httpRequest = new XMLHttpRequest();
+    if (httpRequest.overrideMimeType) {
+      httpRequest.overrideMimeType('text/xml');
+    }
+  }
+
+  if (!httpRequest) {
+    alert('Failed to initialize XMLHttpRequest');
+    return false;
+  }
+
+  $('#mainForm .flexsearch-input').on('keyup', function(e) {
+    console.log(e.currentTarget.value);
+  });
+
 })();
 
 // vim: set sw=2 ts=2 sts=2:
