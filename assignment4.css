@@ -49,6 +49,36 @@
   -moz-appearance: none;
 }
 
+.flexsearch-suggestions {
+  list-style: none;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 26px;
+  text-align: center;
+  margin: 0 40px 0 40px;
+  padding: 10px 40px 0 40px;
+}
+
+.flexsearch-suggestions li {
+  text-align: left;
+  margin: auto;
+  background: #333;
+  padding: 10px 2em 10px 2em;
+  border: 1px solid #888;
+  border-radius: 2px;
+}
+
+.flexsearch-suggestions li a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: #EEE;
+}
+
+.flexsearch-suggestions li:hover {
+  background: #222;
+}
+
 .flexsearch-submit {
   position: absolute;
   right: 0;

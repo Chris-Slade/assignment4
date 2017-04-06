@@ -62,7 +62,7 @@
   $('#searchInput').on('keyup', function(e) {
     e.preventDefault();
 
-    var suggestionList = $('#suggestions')[0];
+    var suggestionList = $('.flexsearch-suggestions')[0];
     suggestionList.innerHTML = "";
     var input = e.currentTarget.value.toLocaleLowerCase();
 
