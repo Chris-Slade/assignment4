@@ -12,21 +12,47 @@
 // keyup events could be helpful to get value of field as the user types
 
 (function() {
-  // Magic!
-  console.log('Keepin\'n it clean with an external script!');
-  var httpRequest;
+  var xhr;
+  var suggestions = new Array();
+  var apiUrl = 'http://www.mattbowytz.com/simple_api.json';
+
+  console.log('Initializing search stuff');
 
   if (window.XMLHttpRequest) {
-      httpRequest = new XMLHttpRequest();
-    if (httpRequest.overrideMimeType) {
-      httpRequest.overrideMimeType('text/xml');
+      xhr = new XMLHttpRequest({mozSystem: true});
+    if (xhr.overrideMimeType) {
+      xhr.overrideMimeType('text/json');
     }
   }
 
-  if (!httpRequest) {
+  if (!xhr) {
     alert('Failed to initialize XMLHttpRequest');
     return false;
   }
+
+  // Get all the data from the API up front.
+  xhr.open('GET', apiUrl + '?data=all');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      try {
+        data = JSON.parse(xhr.responseText);
+      }
+      catch (err) {
+        console.log('Error parsing API response: ' + err);
+        return false;
+      }
+      for (var key in data.data) {
+        var list = data.data[key];
+        for (var i = 0; i < list.length; ++i) {
+          suggestions.push(list[i]);
+        }
+      }
+      suggestions = suggestions.map(function (s) { return s.toLowerCase(); });
+      suggestions.sort();
+      console.log('Loaded ' + suggestions.length + ' suggestions');
+    }
+  };
+  xhr.send();
 
   $('#mainForm .flexsearch-input').on('keyup', function(e) {
     console.log(e.currentTarget.value);
