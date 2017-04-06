@@ -15,3 +15,5 @@
   // Magic!
   console.log('Keepin\'n it clean with an external script!');
 })();
+
+// vim: set sw=2 ts=2 sts=2:
