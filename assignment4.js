@@ -48,7 +48,11 @@
           suggestions.push(list[i]);
         }
       }
-      suggestions = suggestions.map(function (s) { return s.toLowerCase(); });
+      suggestions = suggestions.map(
+        function (s) {
+          return s.toLocaleLowerCase();
+        }
+      );
       suggestions.sort();
       console.log('Loaded ' + suggestions.length + ' suggestions');
     }
@@ -60,7 +64,7 @@
 
     var suggestionList = $('#suggestions')[0];
     suggestionList.innerHTML = "";
-    var input = e.currentTarget.value;
+    var input = e.currentTarget.value.toLocaleLowerCase();
 
     if (input.length === 0) {
       return false;
