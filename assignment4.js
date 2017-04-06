@@ -33,7 +33,7 @@
   // Get all the data from the API up front.
   xhr.open('GET', apiUrl + '?data=all');
   xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
       try {
         data = JSON.parse(xhr.responseText);
       }
@@ -54,8 +54,27 @@
   };
   xhr.send();
 
-  $('#mainForm .flexsearch-input').on('keyup', function(e) {
-    console.log(e.currentTarget.value);
+  $('#searchInput').on('keyup', function(e) {
+    e.preventDefault();
+
+    var suggestionList = $('#suggestions')[0];
+    suggestionList.innerHTML = "";
+    var input = e.currentTarget.value;
+
+    if (input.length === 0) {
+      return false;
+    }
+
+    console.log('Trying to find suggestions for ' + input);
+    console.log(suggestions);
+    for (var i = 0; i < suggestions.length; ++i) {
+      if (suggestions[i].startsWith(input)) {
+        suggestionList.insertAdjacentHTML(
+          'beforeend',
+          '<li>' + suggestions[i] + '</li>'
+        );
+      }
+    }
   });
 
 })();
