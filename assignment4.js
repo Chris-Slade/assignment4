@@ -15,6 +15,7 @@
   var xhr;
   var suggestions = new Array();
   var apiUrl = 'http://www.mattbowytz.com/simple_api.json';
+  var searchQuery = 'https://www.google.com/#q=';
 
   console.log('Initializing search stuff');
 
@@ -69,9 +70,12 @@
     console.log(suggestions);
     for (var i = 0; i < suggestions.length; ++i) {
       if (suggestions[i].startsWith(input)) {
+        var suggestion = suggestions[i];
         suggestionList.insertAdjacentHTML(
           'beforeend',
-          '<li>' + suggestions[i] + '</li>'
+          '<li><a target="_blank" href="' + searchQuery + suggestion + '">'
+          + suggestion
+          + '</a></li>'
         );
       }
     }
